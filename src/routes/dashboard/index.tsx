@@ -8,8 +8,7 @@ interface IDashboard extends RouteComponentProps {
 const Dashboard: FunctionComponent<IDashboard> = ({ children }) => {
   return (
     <div>
-      <h1>Dashboard</h1>
-      <hr />
+      <h4>Dashboard</h4>
       {children}
     </div>
   );
