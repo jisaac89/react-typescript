@@ -25,7 +25,7 @@ export const CombinedContextProvider = ({ arrOfProviders, children }: ICombinedC
         },
         children
       );
-    })[arrOfProviders.length - 1];
+    })[0];
   }
 
   return loop(arrOfProviders);

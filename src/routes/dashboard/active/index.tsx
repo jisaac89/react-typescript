@@ -1,14 +1,14 @@
-import React, { FunctionComponent, useContext } from 'react';
+import React, { FunctionComponent } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { AppStoreContext } from '../../../providers/appProvider';
+import { useAppStore } from '../../../hooks/useAppStore';
 
 interface IActive extends RouteComponentProps {}
 
 const Active: FunctionComponent<IActive> = () => {
-  const appStore = useContext(AppStoreContext);
+  const { isNightMode } = useAppStore();
   return (
     <div>
-      <h1 onClick={() => appStore.toggleNightmode(!appStore.isNightMode)}>Active</h1>
+      <h1>Active - {isNightMode.toString()}</h1>
       <hr />
     </div>
   );
