@@ -5,6 +5,7 @@ import { Nav, NavHeader } from './styles';
 import { GlobalStyles } from '../styles/globalStyles';
 import { CombinedContextProvider } from '../providers/combinedProviders';
 import { AppProvider, AppStoreConsumer } from '../providers/appProvider';
+import { MenuProvider, MenuStoreConsumer } from '../providers/menuProvider';
 
 interface ILayout {}
 
@@ -12,22 +13,28 @@ const Layout: FunctionComponent<ILayout> = ({ children }) => {
   return (
     <>
       <React.StrictMode>
-        <CombinedContextProvider arrOfProviders={[<AppProvider />]}>
+        <CombinedContextProvider arrOfProviders={[<AppProvider />, <MenuProvider />]}>
           <AppStoreConsumer>
-            {({ isNightMode }) => {
-              console.log(isNightMode);
-
+            {({ isNightMode, toggleNightmode }) => {
+              console.log('nightmode is ' + isNightMode);
               return (
                 <>
                   <Nav>
-                    <NavHeader>
-                      <h1>Layout</h1>
-                      <nav>
-                        <button onClick={gotoRoute(config.routes.dashboardActive)}>Dashboard - Active</button>
-                        <br />
-                        <button onClick={gotoRoute(config.routes.dashboardArchived)}>Dashboard - Inactive</button>
-                      </nav>
-                    </NavHeader>
+                    <MenuStoreConsumer>
+                      {({ isOpen, toggleMenu }) => {
+                        console.log(isOpen);
+                        return (
+                          <NavHeader>
+                            <h1 onClick={() => toggleNightmode(!isNightMode)}>Layout</h1>
+                            <nav>
+                              <button onClick={gotoRoute(config.routes.dashboardActive)}>Dashboard - Active</button>
+                              <br />
+                              <button onClick={() => toggleMenu(!isOpen)}>Dashboard - Inactive</button>
+                            </nav>
+                          </NavHeader>
+                        );
+                      }}
+                    </MenuStoreConsumer>
                   </Nav>
                   {children}
                 </>

@@ -1,4 +1,4 @@
-import React, { createContext, useState, Dispatch, SetStateAction } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction, FunctionComponent } from 'react';
 
 const appStore: IAppProviderState = {
   isNightMode: true,
@@ -10,7 +10,11 @@ export interface IAppProviderState {
   toggleNightmode: Dispatch<SetStateAction<boolean>>;
 }
 
-export const AppProvider = ({ children }: { children?: JSX.Element }) => {
+export const AppProvider: FunctionComponent<{ children?: JSX.Element }> = ({
+  children
+}: {
+  children?: JSX.Element;
+}) => {
   const [isNightMode, toggleNightmode] = useState(appStore.isNightMode);
   const defaultContext: IAppProviderState = {
     isNightMode,

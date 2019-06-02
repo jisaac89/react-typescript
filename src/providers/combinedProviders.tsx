@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface ICombinedContextProvider {
-  arrOfProviders?: any;
-  children?: JSX.Element;
+  arrOfProviders: any;
+  children: JSX.Element;
 }
 
 // export const CombinedContextProvider = ({ children }: ICombinedContextProvider) => (
@@ -10,18 +10,36 @@ interface ICombinedContextProvider {
 // );
 
 export const CombinedContextProvider = ({ arrOfProviders, children }: ICombinedContextProvider) => {
-  const arrOfProvidersLength = arrOfProviders.length;
+  function loop(arr: any) {
+    return arr.map((child: any, index: number) => {
+      const nextChild = arr.filter((item: any) => item !== child);
+      if (nextChild.length) {
+        return React.cloneElement(
+          child,
+          {
+            key: index
+          },
+          <CombinedContextProvider children={children} arrOfProviders={nextChild} />
+        );
+      }
 
-  const replies = arrOfProviders.map((Element: any, index: any) => {
-    if (index < arrOfProvidersLength) {
-      //   return React.cloneElement(Element, Element.props, [arrOfProviders[index + 1]]);
-      //   return <CombinedContextProvider arrOfProviders={[arrOfProviders.slice(index + 1)]} />;
-      //   return React.cloneElement(Element, Element.props, [arrOfProviders[index + 1]]);
-      return React.cloneElement(Element, { ...Element.props, key: index }, children);
-    } else {
-      //   return <CombinedContextProvider children={children} />;
-      return children;
-    }
-  });
-  return replies;
+      return React.cloneElement(
+        child,
+        {
+          key: index
+        },
+        children
+      );
+    });
+  }
+
+  return loop(arrOfProviders);
 };
+
+// arrprov > ctx > menuprov > ctx
+
+// return React.cloneElement(
+//   arrOfProviders[0],
+//   { ...arrOfProviders[0].props },
+//   React.cloneElement(<CombinedContextProvider arrOfProviders={arrOfProviders.splice()} />, {}, children)
+// );
