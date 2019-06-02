@@ -1,4 +1,4 @@
-import React, { createContext, useState, Dispatch, SetStateAction, FunctionComponent } from 'react';
+import React, { createContext, useState, Dispatch, SetStateAction, FunctionComponent, useContext } from 'react';
 
 const appStore: IAppProviderState = {
   isNightMode: true,
@@ -25,3 +25,4 @@ export const AppProvider: FunctionComponent<{ children?: JSX.Element }> = ({
 
 export const AppStoreContext = createContext(appStore);
 export const AppStoreConsumer = AppStoreContext.Consumer;
+export const AppStoreValue = () => useContext(AppStoreContext);

@@ -1,21 +1,16 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useContext } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { MenuStoreConsumer } from '../../../providers/menuProvider';
+import { AppStoreContext } from '../../../providers/appProvider';
 
 interface IActive extends RouteComponentProps {}
 
 const Active: FunctionComponent<IActive> = () => {
+  const appStore = useContext(AppStoreContext);
   return (
-    <MenuStoreConsumer>
-      {({ isOpen, toggleMenu }) => {
-        return (
-          <div>
-            <h1 onClick={() => toggleMenu(!isOpen)}>Active</h1>
-            <hr />
-          </div>
-        );
-      }}
-    </MenuStoreConsumer>
+    <div>
+      <h1 onClick={() => appStore.toggleNightmode(!appStore.isNightMode)}>Active</h1>
+      <hr />
+    </div>
   );
 };
 

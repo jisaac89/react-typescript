@@ -1,20 +1,19 @@
 import React, { FunctionComponent } from 'react';
 import { GlobalStyles } from '../styles/globalStyles';
-import { CombinedContextProvider } from '../providers/_combinedProviders';
-import { AppProvider } from '../providers/appProvider';
-import { MenuProvider } from '../providers/menuProvider';
+// import { CombinedContextProvider } from '../providers/_combinedProviders';
+import { AppProvider } from '../contexts/appContext';
 
 interface IBase {}
 
-const Providers = [<AppProvider />, <MenuProvider />];
+// const Providers = [<AppProvider />];
 
 const Base: FunctionComponent<IBase> = ({ children }) => {
   return (
     <>
       <React.StrictMode>
-        <CombinedContextProvider arrOfProviders={Providers}>
+        <AppProvider>
           <>{children}</>
-        </CombinedContextProvider>
+        </AppProvider>
       </React.StrictMode>
       <GlobalStyles />
     </>
