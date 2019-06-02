@@ -4,11 +4,11 @@ import { Home } from './routes/home';
 import { Dashboard } from './routes/dashboard';
 import { Active } from './routes/dashboard/active';
 import { Archived } from './routes/dashboard/archived';
-import { Layout } from './layouts';
+import { DefaultLayout } from './layouts/default';
 
 const App: React.FC = () => {
   return (
-    <Layout>
+    <DefaultLayout>
       <Router>
         <Home path={'/'} />
         <Dashboard path={'dashboard'}>
@@ -16,7 +16,7 @@ const App: React.FC = () => {
           <Archived path={'archived'} />
         </Dashboard>
       </Router>
-    </Layout>
+    </DefaultLayout>
   );
 };
 
