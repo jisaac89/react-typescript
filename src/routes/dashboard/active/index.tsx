@@ -1,14 +1,21 @@
 import React, { FunctionComponent } from 'react';
 import { RouteComponentProps } from '@reach/router';
+import { MenuStoreConsumer } from '../../../providers/menuProvider';
 
 interface IActive extends RouteComponentProps {}
 
 const Active: FunctionComponent<IActive> = () => {
   return (
-    <div>
-      <h1>Active</h1>
-      <hr />
-    </div>
+    <MenuStoreConsumer>
+      {({ isOpen, toggleMenu }) => {
+        return (
+          <div>
+            <h1 onClick={() => toggleMenu(!isOpen)}>Active</h1>
+            <hr />
+          </div>
+        );
+      }}
+    </MenuStoreConsumer>
   );
 };
 

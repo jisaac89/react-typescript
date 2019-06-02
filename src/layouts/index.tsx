@@ -3,17 +3,19 @@ import { gotoRoute } from '../utils/helpers';
 import { config } from '../config';
 import { Nav, NavHeader } from './styles';
 import { GlobalStyles } from '../styles/globalStyles';
-import { CombinedContextProvider } from '../providers/combinedProviders';
+import { CombinedContextProvider } from '../providers/_combinedProviders';
 import { AppProvider, AppStoreConsumer } from '../providers/appProvider';
 import { MenuProvider, MenuStoreConsumer } from '../providers/menuProvider';
 
 interface ILayout {}
 
+const Providers = [<AppProvider />, <MenuProvider />];
+
 const Layout: FunctionComponent<ILayout> = ({ children }) => {
   return (
     <>
       <React.StrictMode>
-        <CombinedContextProvider arrOfProviders={[<AppProvider />, <MenuProvider />]}>
+        <CombinedContextProvider arrOfProviders={Providers}>
           <AppStoreConsumer>
             {({ isNightMode, toggleNightmode }) => {
               console.log('nightmode is ' + isNightMode);
@@ -22,7 +24,7 @@ const Layout: FunctionComponent<ILayout> = ({ children }) => {
                   <Nav>
                     <MenuStoreConsumer>
                       {({ isOpen, toggleMenu }) => {
-                        console.log(isOpen);
+                        console.log('dashboard is ' + isOpen);
                         return (
                           <NavHeader>
                             <h1 onClick={() => toggleNightmode(!isNightMode)}>Layout</h1>
