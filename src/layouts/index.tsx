@@ -1,24 +1,31 @@
 import React, { FunctionComponent } from 'react';
 import { gotoRoute } from '../utils/helpers';
 import { config } from '../config';
+import { Nav, NavHeader } from './styles';
+import { GlobalStyles } from '../styles/globalStyles';
 
 interface ILayout {}
 
 const Layout: FunctionComponent<ILayout> = ({ children }) => {
   return (
-    <React.StrictMode>
-      <div>
-        <h1>Layout</h1>
-        <hr />
-        <nav>
-          <a onClick={gotoRoute(config.routes.dashboardActive)}>Dashboard - Active</a>
-          <br />
-          <a onClick={gotoRoute(config.routes.dashboardArchived)}>Dashboard - Inactive</a>
-        </nav>
-        <hr />
-        {children}
-      </div>
-    </React.StrictMode>
+    <>
+      <React.StrictMode>
+        <>
+          <Nav>
+            <NavHeader>
+              <h1>Layout</h1>
+              <nav>
+                <a onClick={gotoRoute(config.routes.dashboardActive)}>Dashboard - Active</a>
+                <br />
+                <a onClick={gotoRoute(config.routes.dashboardArchived)}>Dashboard - Inactive</a>
+              </nav>
+            </NavHeader>
+          </Nav>
+          {children}
+        </>
+      </React.StrictMode>
+      <GlobalStyles />
+    </>
   );
 };
 
