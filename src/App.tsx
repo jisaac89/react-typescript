@@ -5,17 +5,23 @@ import { Dashboard } from './routes/dashboard';
 import { Active } from './routes/dashboard/active';
 import { Archived } from './routes/dashboard/archived';
 import { DefaultLayout } from './layouts/types/default';
+import { history } from './utils/helpers/routerHistory';
+import { config } from './config';
 
 const App: React.FC = () => {
   return (
     <DefaultLayout>
-      <Router>
-        <Home path={'/'} />
-        <Dashboard path={'dashboard'}>
-          <Active path={'active'} />
-          <Archived path={'archived'} />
-        </Dashboard>
-      </Router>
+      <LocationProvider history={history}>
+        {({ location }) => (
+          <Router location={location}>
+            <Home path={'/:number'} />
+            <Dashboard path={'dashboard'}>
+              <Active path={'active'} />
+              <Archived path={'archived'} />
+            </Dashboard>
+          </Router>
+        )}
+      </LocationProvider>
     </DefaultLayout>
   );
 };

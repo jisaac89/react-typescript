@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { gotoRoute } from '../utils/helpers';
+import { navigate } from '../utils/helpers/routerHistory';
+import { config } from '../config';
 
 const defaultPageState = {
   isSlideIndex: 0
@@ -7,18 +8,31 @@ const defaultPageState = {
 
 const useContextRouter = (route: string) => {
   const [state, setState] = useState(defaultPageState);
+  const routeURL = `${config.baseURL}/${route}`;
 
   useEffect(() => {
-    const nextState = defaultPageState;
-    gotoRoute(`${route}/${defaultPageState.isSlideIndex.toString()}`);
-    setState(nextState);
-  }, [route]);
+    if (state.isSlideIndex) {
+      const nextState =
+        state.isSlideIndex !== defaultPageState.isSlideIndex
+          ? {
+              isSlideIndex: state.isSlideIndex
+            }
+          : defaultPageState;
+      navigate(
+        `${routeURL}${
+          state.isSlideIndex !== defaultPageState.isSlideIndex ? state.isSlideIndex : defaultPageState.isSlideIndex
+        }`
+      );
+      setState(nextState);
+      console.log('aaaa');
+    }
+  }, [routeURL, state.isSlideIndex]);
 
   function setSlideIndex(n: number) {
     const nextState = {
       isSlideIndex: n
     };
-    gotoRoute(`${route}/${n}`);
+    navigate(`${routeURL}/${n}`);
     setState(nextState);
   }
   return {

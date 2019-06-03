@@ -8,11 +8,11 @@ interface IHome extends RouteComponentProps {
 }
 
 const Home: FunctionComponent<IHome> = () => {
-  const { setSlideIndex } = useContextRouter(config.routes.home);
+  const { isSlideIndex, setSlideIndex } = useContextRouter(config.routes.home);
   return (
     <header>
-      <h1>Hello World </h1>
-      <button onClick={() => setSlideIndex(1)}>increment</button>
+      <h1>Hello World {isSlideIndex.toString()}</h1>
+      <button onClick={() => setSlideIndex(isSlideIndex + 1)}>increment</button>
     </header>
   );
 };
