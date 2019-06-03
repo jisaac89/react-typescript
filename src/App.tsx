@@ -12,7 +12,7 @@ const App: React.FC = () => {
     <DefaultLayout>
       <LocationProvider history={history}>
         {({ location }) => (
-          <Router basepath="/" location={location}>
+          <Router location={location}>
             <Home path={'/:number'} />
             <Dashboard path={'dashboard'}>
               <Active path={'active'} />

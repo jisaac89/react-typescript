@@ -11,28 +11,27 @@ const useContextRouter = (route: string) => {
   const routeURL = `${config.baseURL}/${route}`;
 
   useEffect(() => {
-    if (state.isSlideIndex) {
-      const nextState =
-        state.isSlideIndex !== defaultPageState.isSlideIndex
-          ? {
-              isSlideIndex: state.isSlideIndex
-            }
-          : defaultPageState;
-      navigate(
-        `${routeURL}${
-          state.isSlideIndex !== defaultPageState.isSlideIndex ? state.isSlideIndex : defaultPageState.isSlideIndex
-        }`
-      );
-      setState(nextState);
-      console.log('aaaa');
-    }
+    const urlIndex = {
+      isSlideIndex: Number(window.location.pathname.substr(window.location.pathname.length - 1))
+    };
+
+    const nextState =
+      state.isSlideIndex !== defaultPageState.isSlideIndex
+        ? {
+            isSlideIndex: state.isSlideIndex
+          }
+        : urlIndex;
+    navigate(
+      `${state.isSlideIndex !== defaultPageState.isSlideIndex ? state.isSlideIndex : defaultPageState.isSlideIndex}`
+    );
+    setState(nextState);
   }, [routeURL, state.isSlideIndex]);
 
   function setSlideIndex(n: number) {
     const nextState = {
       isSlideIndex: n
     };
-    navigate(`${routeURL}/${n}`);
+    navigate(`${n}`);
     setState(nextState);
   }
   return {
