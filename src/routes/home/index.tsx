@@ -7,11 +7,9 @@ interface IHome extends RouteComponentProps {
 
 const Home: FunctionComponent<IHome> = () => {
   return (
-    <div className={'App'}>
-      <header className={'App-header'}>
-        <h1>Hello World</h1>
-      </header>
-    </div>
+    <header>
+      <h1>Hello World</h1>
+    </header>
   );
 };
 
