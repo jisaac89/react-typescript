@@ -6,14 +6,13 @@ import { Active } from './routes/dashboard/active';
 import { Archived } from './routes/dashboard/archived';
 import { DefaultLayout } from './layouts/types/default';
 import { history } from './utils/helpers/routerHistory';
-import { config } from './config';
 
 const App: React.FC = () => {
   return (
     <DefaultLayout>
       <LocationProvider history={history}>
         {({ location }) => (
-          <Router location={location}>
+          <Router basepath="/" location={location}>
             <Home path={'/:number'} />
             <Dashboard path={'dashboard'}>
               <Active path={'active'} />
