@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { useAppStore } from '../../../hooks/useAppStore';
+import { usePageStore } from '../../../hooks/usePageStore';
 
 interface IActive extends RouteComponentProps {}
 
 const Active: FunctionComponent<IActive> = () => {
-  const { isNightMode } = useAppStore();
+  const { isSlideIndex } = usePageStore('home');
   return (
     <div>
-      <h1>Active - {isNightMode.toString()}</h1>
+      <h1>Active - {isSlideIndex.toString()}</h1>
       <hr />
     </div>
   );

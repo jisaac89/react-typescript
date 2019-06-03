@@ -15,7 +15,7 @@ const Header: FunctionComponent<IHeader> = ({ children }) => {
         <nav>
           <button onClick={gotoRoute(config.routes.dashboardActive)}>Dashboard - Active</button>
           <br />
-          <button>Dashboard - Inactive</button>
+          <button onClick={gotoRoute(config.routes.dashboardArchived)}>Dashboard - Inactive</button>
         </nav>
       </NavHeader>
     </Nav>
