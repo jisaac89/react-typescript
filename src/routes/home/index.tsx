@@ -1,17 +1,18 @@
 import React, { FunctionComponent } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { usePageStore } from '../../hooks/usePageStore';
+import { config } from '../../config';
+import { useContextRouter } from '../../hooks/useContextRouter';
 
 interface IHome extends RouteComponentProps {
   //
 }
 
 const Home: FunctionComponent<IHome> = () => {
-  const { isSlideIndex, setSlideIndex } = usePageStore('home');
+  const { setSlideIndex } = useContextRouter(config.routes.home);
   return (
     <header>
-      <h1>Hello World {isSlideIndex.toString()}</h1>
-      <button onClick={() => setSlideIndex(isSlideIndex + 1)}>increment</button>
+      <h1>Hello World </h1>
+      <button onClick={() => setSlideIndex(1)}>increment</button>
     </header>
   );
 };

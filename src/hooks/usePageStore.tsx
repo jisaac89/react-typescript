@@ -17,6 +17,7 @@ const usePageStore = (route: string) => {
           [route]: defaultPageState
         }
       };
+
       setState(nextState);
     }
   }, [route, routeAlreadyExists, setState]);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Router } from '@reach/router';
+import { Router, LocationProvider } from '@reach/router';
 import { Home } from './routes/home';
 import { Dashboard } from './routes/dashboard';
 import { Active } from './routes/dashboard/active';
