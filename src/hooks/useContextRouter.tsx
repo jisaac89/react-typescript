@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { navigate } from '../utils/helpers/routerHistory';
-import { config } from '../config';
+import { navigate, history } from '../utils/helpers/routerHistory';
 
 const defaultPageState = {
   isSlideIndex: 0
@@ -8,30 +7,44 @@ const defaultPageState = {
 
 // listen to back button,  check to see if you can use multiple use effect
 
-const routeURLPath = Number(window.location.pathname.substr(window.location.pathname.length - 1));
-
-const useContextRouter = (route: string) => {
+const useContextRouter = () => {
   const [state, setState] = useState(defaultPageState);
-  const routeURL = `${config.baseURL}/${route}`;
 
+  //on mount
   useEffect(() => {
-    if (routeURLPath > state.isSlideIndex) {
-      setSlideIndex(routeURLPath);
-    }
-  }, [routeURL, state.isSlideIndex]);
-
-  useEffect(() => {
-    if (window.history && window.history.pushState) {
-      window.addEventListener('backbutton', () => setSlideIndex(routeURLPath - 1));
+    const urlRoute = Number(window.location.pathname.substr(window.location.pathname.length - 1));
+    if (isNaN(urlRoute)) {
+      navigate(`/0`);
+    } else {
+      const routeURLPath = urlRoute;
+      setState({ isSlideIndex: routeURLPath });
     }
   }, []);
 
+  // listen for slideindex change
+  useEffect(() => {
+    history.listen(listener => {
+      const urlRoute = Number(listener.location.pathname.replace(/\\|\//g, ''));
+      if (state.isSlideIndex !== urlRoute) {
+        console.log(state.isSlideIndex);
+        console.log(urlRoute);
+        if (listener.action === 'POP') {
+          console.log(listener.location.pathname.replace(/\\|\//g, ''));
+          setState({ isSlideIndex: urlRoute });
+        } else if (listener.action === 'PUSH') {
+          setState({ isSlideIndex: state.isSlideIndex + 1 });
+        }
+      }
+    });
+  }, [state.isSlideIndex]);
+
+  // on unmount
+  useEffect(() => {
+    return history.listen(location => {});
+  }, []);
+
   function setSlideIndex(n: number) {
-    const nextState = {
-      isSlideIndex: n
-    };
     navigate(`${n}`);
-    setState(nextState);
   }
 
   return {
