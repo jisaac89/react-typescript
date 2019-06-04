@@ -1,17 +1,27 @@
 import React, { FunctionComponent } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { useContextRouter } from '../../hooks/useContextRouter';
+import { useCollectionStore } from '../../hooks/useCollectionStore';
 
 interface IHome extends RouteComponentProps {
   //
 }
 
+interface IUser {
+  name: string;
+}
+
+const user: IUser = {
+  name: 'joe'
+};
+
 const Home: FunctionComponent<IHome> = () => {
-  const { isSlideIndex, setSlideIndex } = useContextRouter();
+  const { item, onChange } = useCollectionStore([], user);
   return (
     <header>
-      <h1>Hello World {isSlideIndex.toString()}</h1>
-      <button onClick={() => setSlideIndex(isSlideIndex + 1)}>increment</button>
+      <h1>Hello World </h1>
+      <button>increment {item.name}</button>
+      <br />
+      <input defaultValue={item.name} onChange={event => onChange('name', event.target.value)} />
     </header>
   );
 };

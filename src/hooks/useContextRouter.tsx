@@ -26,10 +26,7 @@ const useContextRouter = () => {
     history.listen(listener => {
       const urlRoute = Number(listener.location.pathname.replace(/\\|\//g, ''));
       if (state.isSlideIndex !== urlRoute) {
-        console.log(state.isSlideIndex);
-        console.log(urlRoute);
         if (listener.action === 'POP') {
-          console.log(listener.location.pathname.replace(/\\|\//g, ''));
           setState({ isSlideIndex: urlRoute });
         } else if (listener.action === 'PUSH') {
           setState({ isSlideIndex: state.isSlideIndex + 1 });
