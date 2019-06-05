@@ -17,11 +17,13 @@ function useCollectionStore<T>(collection: T[], item: T) {
   }, []);
 
   function onChange<K extends keyof T>(key: K, value: T[K]): void {
-    setState({
-      collection: state.collection,
-      item: {
-        [key]: value
-      }
+    setState(prevState => {
+      return {
+        collection: prevState.collection,
+        item: {
+          [key]: value
+        }
+      };
     });
   }
 

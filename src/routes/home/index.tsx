@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import { useCollectionStore } from '../../hooks/useCollectionStore';
+import { useObject } from '../../hooks/useObject';
 
 interface IHome extends RouteComponentProps {
   //
@@ -10,18 +10,38 @@ interface IUser {
   name: string;
 }
 
+interface ICat {
+  type: 'SHD';
+}
+
+interface IDog {
+  age: number;
+  color: string;
+}
+
 const user: IUser = {
   name: 'joe'
 };
 
+const cat: ICat = {
+  type: 'SHD'
+};
+
+const dog: IDog = {
+  age: 5,
+  color: 'red'
+};
+
 const Home: FunctionComponent<IHome> = () => {
-  const { item, onChange } = useCollectionStore([], user);
+  const { object, onChange } = useObject(dog);
+  console.log(object.age);
+
   return (
     <header>
       <h1>Hello World </h1>
-      <button>increment {item.name}</button>
+      <button>increment {object.age}</button>
       <br />
-      <input defaultValue={item.name} onChange={event => onChange('name', event.target.value)} />
+      <input defaultValue={object.age.toString()} onChange={event => onChange('age', Number(event.target.value))} />
     </header>
   );
 };

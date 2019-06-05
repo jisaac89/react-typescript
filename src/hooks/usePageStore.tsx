@@ -23,27 +23,29 @@ const usePageStore = (route: string) => {
   }, [route, routeAlreadyExists, setState]);
 
   function setSlideIndex(n: number) {
-    const nextState = {
-      routes: {
-        [route]: {
-          isSlideIndex: n,
-          isLoading: state.routes[route].isLoading
+    setState(prevState => {
+      return {
+        routes: {
+          [route]: {
+            isSlideIndex: n,
+            isLoading: prevState.routes[route].isLoading
+          }
         }
-      }
-    };
-    setState(nextState);
+      };
+    });
   }
 
   function setLoading(isLoading: boolean) {
-    const nextState = {
-      routes: {
-        [route]: {
-          isLoading: isLoading,
-          isSlideIndex: state.routes[route].isSlideIndex
+    setState(prevState => {
+      return {
+        routes: {
+          [route]: {
+            isLoading: isLoading,
+            isSlideIndex: prevState.routes[route].isSlideIndex
+          }
         }
-      }
-    };
-    setState(nextState);
+      };
+    });
   }
 
   return {
