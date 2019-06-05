@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { usePageStore } from '../../../hooks/usePageStore';
-import { IPageRoute, IPageRouteView } from '../../../contexts/pageContext';
+import { IPageRouteView } from '../../../contexts/pageContext';
 
 const Active: FunctionComponent<IPageRouteView> = () => {
   const { isSlideIndex } = usePageStore('home');

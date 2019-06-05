@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 
-function useIndex(idx: number) {
+interface IUseIndex {
+  index: number;
+  goto: (n: number) => void;
+  reset: () => void;
+}
+
+function useIndex(idx: number): IUseIndex {
   const [state, setState] = useState(0);
 
   useEffect(() => {
@@ -11,9 +17,14 @@ function useIndex(idx: number) {
     setState(n);
   }
 
+  function reset() {
+    setState(idx);
+  }
+
   return {
     index: state,
-    goto
+    goto,
+    reset
   };
 }
 
