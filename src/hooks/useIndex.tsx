@@ -12,7 +12,7 @@ function useIndex(idx: number) {
   }
 
   return {
-    state,
+    index: state,
     goto
   };
 }

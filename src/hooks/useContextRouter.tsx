@@ -36,9 +36,7 @@ const useContextRouter = () => {
   }, [state.isSlideIndex]);
 
   // on unmount
-  useEffect(() => {
-    return history.listen(location => {});
-  }, []);
+  useEffect(() => history.listen(location => null), []);
 
   function setSlideIndex(n: number) {
     navigate(`${n}`);

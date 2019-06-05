@@ -11,7 +11,7 @@ export const defaultCollectionState: IState<any> = {
   item: {}
 };
 
-const CollectionContext = createContext<ICreateContext<IState<any>>>([defaultCollectionState, () => {}]);
+const CollectionContext = createContext<ICreateContext<IState<any>>>([defaultCollectionState, () => null]);
 
 const CollectionProvider: FunctionComponent = ({ children }) => {
   const [state, setState] = useState(defaultCollectionState);

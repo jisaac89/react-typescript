@@ -5,21 +5,17 @@ import { CombinedContextProvider } from '../../providers/_combinedProviders';
 import { PageProvider } from '../../contexts/pageContext';
 import { CollectionProvider } from '../../contexts/collectionContext';
 
-interface IBase {}
-
 const Providers = [<AppProvider />, <PageProvider />, <CollectionProvider />];
 
-const BaseLayout: FunctionComponent<IBase> = ({ children }) => {
-  return (
-    <>
-      <React.StrictMode>
-        <CombinedContextProvider arrOfProviders={Providers}>
-          <>{children}</>
-        </CombinedContextProvider>
-      </React.StrictMode>
-      <GlobalStyles />
-    </>
-  );
-};
+const BaseLayout: FunctionComponent = ({ children }) => (
+  <>
+    <React.StrictMode>
+      <CombinedContextProvider arrOfProviders={Providers}>
+        <>{children}</>
+      </CombinedContextProvider>
+    </React.StrictMode>
+    <GlobalStyles />
+  </>
+);
 
 export { BaseLayout };

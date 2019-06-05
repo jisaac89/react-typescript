@@ -21,7 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'",
+    "lint": "tslint --project tsconfig.json 'src/**/*.{ts,tsx}'",
+    "lint-check": "tslint --fix -c tslint.json 'src/**/*.{ts,tsx}'",
     "check": "npm-check -u"
   },
   "eslintConfig": {
@@ -38,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tslint": "^5.17.0"
   }
 }

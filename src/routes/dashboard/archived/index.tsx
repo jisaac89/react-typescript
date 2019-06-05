@@ -1,15 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { IPageRouteView } from '../../../contexts/pageContext';
 
-interface IArchived extends RouteComponentProps {}
-
-const Archived: FunctionComponent<IArchived> = () => {
-  return (
-    <div>
-      <h1>Archived</h1>
-      <hr />
-    </div>
-  );
-};
+const Archived: FunctionComponent<IPageRouteView> = () => (
+  <div>
+    <h1>Archived</h1>
+    <hr />
+  </div>
+);
 
 export { Archived };

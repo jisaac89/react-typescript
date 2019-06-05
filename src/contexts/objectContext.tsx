@@ -2,11 +2,11 @@ import React from 'react';
 import { createContext, FunctionComponent, useState } from 'react';
 import { ICreateContext } from '../utils/types/generics';
 
-export interface IDefaultObject {}
+export type IDefaultObject = object;
 
 const defaultObjectState: IDefaultObject = {};
 
-const ObjectContext = createContext<ICreateContext<IDefaultObject>>([defaultObjectState, () => {}]);
+const ObjectContext = createContext<ICreateContext<IDefaultObject>>([defaultObjectState, () => null]);
 
 const ObjectProvider: FunctionComponent = ({ children }) => {
   const [state, setState] = useState(defaultObjectState);

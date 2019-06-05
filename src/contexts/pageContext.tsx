@@ -7,14 +7,20 @@ export interface IPageState {
 }
 
 export interface IPageRoute {
+  default: boolean;
   routes: IDictionary<IPageState>;
+  path: string;
+  children: React.ReactNode;
 }
 
-const defaultsRoute: IPageRoute = {
+export type IPageRouteView = Partial<IPageRoute>;
+export type IPageContextState = Pick<IPageRoute, 'routes'>;
+
+const defaultsRoute = {
   routes: {}
 };
 
-const PageContext = createContext<ICreateContext<IPageRoute>>([defaultsRoute, () => {}]);
+const PageContext = createContext<ICreateContext<IPageContextState>>([defaultsRoute, () => null]);
 
 const PageProvider: FunctionComponent = ({ children }) => {
   const [state, setState] = useState(defaultsRoute);

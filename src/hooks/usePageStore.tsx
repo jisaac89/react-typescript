@@ -23,29 +23,25 @@ const usePageStore = (route: string) => {
   }, [route, routeAlreadyExists, setState]);
 
   function setSlideIndex(n: number) {
-    setState(prevState => {
-      return {
-        routes: {
-          [route]: {
-            isSlideIndex: n,
-            isLoading: prevState.routes[route].isLoading
-          }
+    setState(prevState => ({
+      routes: {
+        [route]: {
+          isSlideIndex: n,
+          isLoading: prevState.routes[route].isLoading
         }
-      };
-    });
+      }
+    }));
   }
 
   function setLoading(isLoading: boolean) {
-    setState(prevState => {
-      return {
-        routes: {
-          [route]: {
-            isLoading: isLoading,
-            isSlideIndex: prevState.routes[route].isSlideIndex
-          }
+    setState(prevState => ({
+      routes: {
+        [route]: {
+          isLoading: isLoading,
+          isSlideIndex: prevState.routes[route].isSlideIndex
         }
-      };
-    });
+      }
+    }));
   }
 
   return {

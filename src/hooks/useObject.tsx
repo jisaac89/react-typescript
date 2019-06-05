@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { ObjectContext } from '../contexts/objectContext';
 
-function useObject<T, X>(obj: T, obj2?: X) {
+function useObject<T extends object, X extends object>(obj: T, obj2?: X) {
   const [state, setState] = useContext(ObjectContext);
 
   // only on mount
@@ -15,13 +15,11 @@ function useObject<T, X>(obj: T, obj2?: X) {
   }, []);
 
   function onChange<K extends keyof T & X>(key: K, value: Partial<T & X>[K]): void {
-    setState(prevState => {
-      return {
-        item: {
-          [key]: value
-        }
-      };
-    });
+    setState(prevState => ({
+      item: {
+        [key]: value
+      }
+    }));
   }
 
   return {

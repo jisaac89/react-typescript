@@ -15,23 +15,18 @@ const isLocalhost = Boolean(
     // [::1] is the IPv6 localhost address.
     window.location.hostname === '[::1]' ||
     // 127.0.0.1/8 is considered localhost for IPv4.
-    window.location.hostname.match(
-      /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    )
+    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
 );
 
-type Config = {
-  onSuccess?: (registration: ServiceWorkerRegistration) => void;
-  onUpdate?: (registration: ServiceWorkerRegistration) => void;
-};
+interface Config {
+  onSuccess?(registration: ServiceWorkerRegistration): void;
+  onUpdate?(registration: ServiceWorkerRegistration): void;
+}
 
-export function register(config?: Config) {
+export function register(config: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
-    const publicUrl = new URL(
-      (process as { env: { [key: string]: string } }).env.PUBLIC_URL,
-      window.location.href
-    );
+    const publicUrl = new URL((process as { env: { [key: string]: string } }).env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
       // Our service worker won't work if PUBLIC_URL is on a different origin
       // from what our page is served on. This might happen if a CDN is used to
@@ -62,7 +57,7 @@ export function register(config?: Config) {
   }
 }
 
-function registerValidSW(swUrl: string, config?: Config) {
+function registerValidSW(swUrl: string, config: Config) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
@@ -72,7 +67,7 @@ function registerValidSW(swUrl: string, config?: Config) {
           return;
         }
         installingWorker.onstatechange = () => {
-          if (installingWorker.state === 'installed') {
+          if (config && installingWorker.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
@@ -93,8 +88,9 @@ function registerValidSW(swUrl: string, config?: Config) {
               console.log('Content is cached for offline use.');
 
               // Execute callback
-              if (config && config.onSuccess) {
-                config.onSuccess(registration);
+              if (Boolean(config)) {
+                // fix
+                //config.onSuccess(registration);
               }
             }
           }
@@ -106,38 +102,37 @@ function registerValidSW(swUrl: string, config?: Config) {
     });
 }
 
-function checkValidServiceWorker(swUrl: string, config?: Config) {
+function checkValidServiceWorker(swUrl: string, config: Config) {
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl)
-    .then(response => {
+    .then(async response => {
       // Ensure service worker exists, and that we really are getting a JS file.
-      const contentType = response.headers.get('content-type');
-      if (
-        response.status === 404 ||
-        (contentType != null && contentType.indexOf('javascript') === -1)
-      ) {
-        // No service worker found. Probably a different app. Reload the page.
-        navigator.serviceWorker.ready.then(registration => {
-          registration.unregister().then(() => {
+      if (Boolean(config)) {
+        const contentType = response.headers.get('content-type');
+        if (response.status === 404 || (contentType !== null && contentType.indexOf('javascript') === -1)) {
+          // No service worker found. Probably a different app. Reload the page.
+          const detectAndLogOff = await unregister();
+          if (Boolean(detectAndLogOff)) {
             window.location.reload();
-          });
-        });
-      } else {
-        // Service worker found. Proceed as normal.
-        registerValidSW(swUrl, config);
+          } else {
+            registerValidSW(swUrl, config);
+          }
+        }
       }
     })
     .catch(() => {
-      console.log(
-        'No internet connection found. App is running in offline mode.'
-      );
+      console.log('No internet connection found. App is running in offline mode.');
     });
 }
 
-export function unregister() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then(registration => {
-      registration.unregister();
-    });
+export async function unregister() {
+  try {
+    if ('serviceWorker' in navigator) {
+      const serviceWorkerRegistration = await navigator.serviceWorker.ready;
+      const isLoggedOff = await serviceWorkerRegistration.unregister();
+      return isLoggedOff;
+    }
+  } catch (e) {
+    throw Error(e as string);
   }
 }

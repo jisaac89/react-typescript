@@ -1,17 +1,11 @@
 import React, { FunctionComponent } from 'react';
-import { RouteComponentProps } from '@reach/router';
+import { IPageRouteView } from '../../contexts/pageContext';
 
-interface IDashboard extends RouteComponentProps {
-  children: JSX.Element[];
-}
-
-const Dashboard: FunctionComponent<IDashboard> = ({ children }) => {
-  return (
-    <div>
-      <h4>Dashboard</h4>
-      {children}
-    </div>
-  );
-};
+const Dashboard: FunctionComponent<IPageRouteView> = ({ children }) => (
+  <div>
+    <h4>Dashboard</h4>
+    {children}
+  </div>
+);
 
 export { Dashboard };
