@@ -10,8 +10,11 @@ function useIndex(idx: number): IUseIndex {
   const [state, setState] = useState(0);
 
   useEffect(() => {
-    setState(idx);
-  }, [idx]);
+    if (state !== idx) {
+      setState(() => state);
+    }
+    return () => setState(0);
+  }, [idx, state]);
 
   function goto(n: number) {
     setState(n);
