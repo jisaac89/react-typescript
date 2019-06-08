@@ -1,9 +1,5 @@
-// import { navigate } from '@reach/router';
-
-import { navigate } from './routerHistory';
-
 export const gotoRoute = (route: string) => () => {
-  navigate(route);
+  //
 };
 
 export const createArrayFromNumber = (numberOfIndexs: number, val: any, currentindex = 0, arr: any[] = []): any[] => {
