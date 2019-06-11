@@ -6,7 +6,6 @@ export interface IAppProviderState {
 }
 
 const defaults = { isNightMode: false };
-
 const AppContext = React.createContext<ICreateContext<IAppProviderState>>([defaults, () => null]);
 
 const AppProvider = (props: { children?: JSX.Element }) => {

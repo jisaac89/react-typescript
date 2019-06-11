@@ -1,17 +1,18 @@
 import React, { FunctionComponent } from 'react';
-import { IPageRouteView } from '../../contexts/pageContext';
-import { useIndex } from '../../hooks/useIndex';
-import { Header } from '../../components/atoms/header';
-import { TouchableOpacity } from 'react-native';
+import { Button } from 'react-native';
+import { IReactNavigationPage } from '../../navigation/IReactNavigationPage';
+import { Layer } from '../../components/Layer/Layer';
 
-const Home: FunctionComponent<IPageRouteView> = () => {
-  const slide1 = useIndex(5);
-  // const slide2 = useIndex(12);
+const Home: FunctionComponent<IReactNavigationPage> = ({ navigation }) => {
   return (
-    <Header>
-      <TouchableOpacity />
-      <h1 onClick={() => slide1.reset()}>Hello World {slide1.index}</h1>
-    </Header>
+    <Layer fill flex="row">
+      <Layer flexCenter fill>
+        <Button onPress={() => navigation.navigate('Dashboard')} title={'Hello World'} />
+      </Layer>
+      <Layer flexCenter fill>
+        <Button onPress={() => navigation.navigate('Dashboard')} title={'Hello World'} />
+      </Layer>
+    </Layer>
   );
 };
 

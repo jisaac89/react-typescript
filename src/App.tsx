@@ -2,18 +2,12 @@ import React, { FunctionComponent, useState } from 'react';
 import { DefaultLayout } from './layouts/types/default';
 import { AppLoading } from 'expo';
 import { AppNavigation } from './navigation/MainTabNavigator';
-import { Platform, StatusBar } from 'react-native';
 import { Visible } from './components/atoms';
-import { config } from './config';
-import { Asset } from 'expo-asset';
-import { Font } from 'expo';
-import { createStackNavigator } from 'react-navigation';
 
 // const assetArray = [Asset.loadAsync(config.assets.images), Font.loadAsync(config.assets.fonts)];
-
 // const AppContainer = createStackNavigator(AppNavigation);
 
-const App: FunctionComponent<{ skipLoadingScreen: boolean }> = ({ skipLoadingScreen }) => {
+const App: FunctionComponent<{ skipLoadingScreen?: boolean }> = ({ skipLoadingScreen }) => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   const loadResourcesAsync = async () => {
@@ -35,7 +29,6 @@ const App: FunctionComponent<{ skipLoadingScreen: boolean }> = ({ skipLoadingScr
     // put back in strict mode once legacy context api is updated for rn and rnw components
     <Visible isVisible={true} elseRender={appLoading}>
       <DefaultLayout>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <AppNavigation />
       </DefaultLayout>
     </Visible>

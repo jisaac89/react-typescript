@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { IPageRouteView } from '../../contexts/pageContext';
+import { Button } from 'react-native';
+import { IReactNavigationPage } from '../../navigation/IReactNavigationPage';
+import { Layer } from '../../components/Layer/Layer';
 
-const Dashboard: FunctionComponent<IPageRouteView> = ({ children }) => (
-  <div>
-    <h4>Dashboard</h4>
-    {children}
-  </div>
+const Dashboard: FunctionComponent<IReactNavigationPage> = ({ children, navigation }) => (
+  <Layer fill>
+    <Button onPress={() => navigation.navigate('Home')} title={'Dashboard'} />
+  </Layer>
 );
 
 export { Dashboard };

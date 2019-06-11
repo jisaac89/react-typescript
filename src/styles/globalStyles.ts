@@ -7,15 +7,14 @@ export const fill = {
 };
 
 export const flex = {
-  display: 'flex',
   flex: '1'
 };
 
 export const flexCenter = {
   display: 'flex',
-  'justify-content': 'center',
-  'flex-direction': 'column',
-  'align-items': 'center'
+  justifyContent: 'center',
+  flexDirection: 'column',
+  alignItems: 'center'
 };
 
 export const dblock = {

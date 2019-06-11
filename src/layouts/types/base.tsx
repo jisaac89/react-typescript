@@ -1,16 +1,16 @@
 import React, { FunctionComponent } from 'react';
-// import { GlobalStyles } from '../../styles/globalStyles';k
 import { AppProvider } from '../../contexts/appContext';
-// import { PageProvider } from '../../contexts/pageContext';
-// import { CollectionProvider } from '../../contexts/collectionContext';
+import { CollectionProvider } from '../../contexts/collectionContext';
+import { CombinedContextProvider } from '../../contexts/_combinedContext';
+import { Layer } from '../../components/Layer/Layer';
 
-// const Providers = [<AppProvider />, <PageProvider />, <CollectionProvider />];
+const Providers = [<AppProvider />, <CollectionProvider />];
 
 const BaseLayout: FunctionComponent = ({ children }) => (
   <>
-    <AppProvider>
-      <>{children}</>
-    </AppProvider>
+    <CombinedContextProvider arrOfProviders={Providers}>
+      <Layer fill>{children}</Layer>
+    </CombinedContextProvider>
     {/* <GlobalStyles /> */}
   </>
 );
