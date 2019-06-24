@@ -1,12 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { usePageStore } from '../../../hooks/usePageStore';
-import { IPageRouteView } from '../../../contexts/pageContext';
 
-const Active: FunctionComponent<IPageRouteView> = () => {
-  const { isSlideIndex } = usePageStore('home');
+const Active: FunctionComponent = () => {
   return (
     <div>
-      <h1>Active - {isSlideIndex.toString()}</h1>
+      <h1>Active</h1>
       <hr />
     </div>
   );

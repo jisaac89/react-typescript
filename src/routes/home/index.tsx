@@ -1,17 +1,12 @@
 import React, { FunctionComponent } from 'react';
-import { Button } from 'react-native';
-import { IReactNavigationPage } from '../../navigation/IReactNavigationPage';
 import { Layer } from '../../components/Layer/Layer';
+import { RouteButton } from '../../components/atoms';
 
-const Home: FunctionComponent<IReactNavigationPage> = ({ navigation }) => {
+const Home: FunctionComponent = () => {
   return (
-    <Layer fill flex="row">
-      <Layer flexCenter fill>
-        <Button onPress={() => navigation.navigate('Dashboard')} title={'Hello World'} />
-      </Layer>
-      <Layer flexCenter fill>
-        <Button onPress={() => navigation.navigate('Dashboard')} title={'Hello World'} />
-      </Layer>
+    <Layer fill flex={'row'}>
+      <RouteButton to={'/'} title={'Home'} />
+      <RouteButton to={'/dashboard'} title={'Dashboard'} />
     </Layer>
   );
 };

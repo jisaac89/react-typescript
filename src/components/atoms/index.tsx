@@ -1,4 +1,6 @@
 import React, { FunctionComponent } from 'react';
+import { Link } from 'react-router-dom';
+import { Text } from 'react-native';
 
 // Components witha body no more than 7 lines
 
@@ -19,4 +21,10 @@ const Visible: FunctionComponent<IVisibleProps> = ({ isVisible, children, elseRe
   return elseRender ? elseRender : null;
 };
 
-export { Visible, TabBarIcon };
+const RouteButton: FunctionComponent<{ to: string; title: string }> = ({ to, title }) => (
+  <Link to={to}>
+    <Text>{title}</Text>
+  </Link>
+);
+
+export { Visible, TabBarIcon, RouteButton };

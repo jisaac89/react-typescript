@@ -1,9 +1,8 @@
 import React, { FunctionComponent, useState } from 'react';
 import { DefaultLayout } from './layouts/types/default';
 import { AppLoading } from 'expo';
-import { AppNavigation } from './navigation/MainTabNavigator';
+import { Navigator } from './navigation/MainTabNavigator';
 import { Visible } from './components/atoms';
-
 // const assetArray = [Asset.loadAsync(config.assets.images), Font.loadAsync(config.assets.fonts)];
 // const AppContainer = createStackNavigator(AppNavigation);
 
@@ -29,7 +28,7 @@ const App: FunctionComponent<{ skipLoadingScreen?: boolean }> = ({ skipLoadingSc
     // put back in strict mode once legacy context api is updated for rn and rnw components
     <Visible isVisible={true} elseRender={appLoading}>
       <DefaultLayout>
-        <AppNavigation />
+        <Navigator />
       </DefaultLayout>
     </Visible>
   );
