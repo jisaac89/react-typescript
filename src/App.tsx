@@ -3,8 +3,6 @@ import { DefaultLayout } from './layouts/types/default';
 import { AppLoading } from 'expo';
 import { Navigator } from './navigation/MainTabNavigator';
 import { Visible } from './components/atoms';
-// const assetArray = [Asset.loadAsync(config.assets.images), Font.loadAsync(config.assets.fonts)];
-// const AppContainer = createStackNavigator(AppNavigation);
 
 const App: FunctionComponent<{ skipLoadingScreen?: boolean }> = ({ skipLoadingScreen }) => {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -26,7 +24,7 @@ const App: FunctionComponent<{ skipLoadingScreen?: boolean }> = ({ skipLoadingSc
 
   return (
     // put back in strict mode once legacy context api is updated for rn and rnw components
-    <Visible isVisible={true} elseRender={appLoading}>
+    <Visible isVisible={isLoadingComplete} elseRender={appLoading}>
       <DefaultLayout>
         <Navigator />
       </DefaultLayout>

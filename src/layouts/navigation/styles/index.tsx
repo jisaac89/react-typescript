@@ -16,7 +16,7 @@ const styleNav = (props: {}) => {
 // export comp type
 const HeaderStyle: FunctionComponent = props => {
   return (
-    <LinearGradient style={styleNav(props)} colors={['#4c669f', '#3b5998', '#192f6a']}>
+    <LinearGradient style={styleNav(props)} colors={['#fff', '#ccc', '#ddd']}>
       <View>{props.children}</View>
     </LinearGradient>
   );
